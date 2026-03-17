@@ -16,12 +16,12 @@ Instead, use one of the following methods to retrieve the script:
 git clone https://github.com/Silejonu/bash_loading_animations
 ```
 ```bash
-curl -O https://raw.githubusercontent.com/Silejonu/bash_loading_animations/main/bash_loading_animations.sh
-curl -O https://raw.githubusercontent.com/Silejonu/bash_loading_animations/main/bash_loading_animations.demo
+curl -O ./vendor/bash_loading_animations/bash_loading_animations.sh
+curl -O ./vendor/bash_loading_animations/bash_loading_animations.demo
 ```
 ```bash
-wget https://raw.githubusercontent.com/Silejonu/bash_loading_animations/main/bash_loading_animations.sh
-wget https://raw.githubusercontent.com/Silejonu/bash_loading_animations/main/bash_loading_animations.demo
+wget ./vendor/bash_loading_animations/bash_loading_animations.sh
+wget ./vendor/bash_loading_animations/bash_loading_animations.demo
 ```
 
 Run the provided script `bash_loading_animations.demo` to quickly visualise the available animations.

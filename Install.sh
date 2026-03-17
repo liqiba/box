@@ -1,4 +1,5 @@
 #!/bin/sh
+export TERM=${TERM:-xterm}
 tput sgr0; clear
 
 ## Load Seedbox Components
@@ -72,9 +73,9 @@ if [[ ! "$OS" =~ "Debian" ]] && [[ ! "$OS" =~ "Ubuntu" ]]; then	#Only Debian and
 fi
 
 if [[ "$OS" =~ "Debian" ]]; then	#Debian 10+ are supported
-	if [[ ! "$VER" =~ "10" ]] && [[ ! "$VER" =~ "11" ]] && [[ ! "$VER" =~ "12" ]]; then
+	if [[ ! "$VER" =~ "10" ]] && [[ ! "$VER" =~ "11" ]] && [[ ! "$VER" =~ "12" ]] && [[ ! "$VER" =~ "13" ]] && [[ ! "$VER" =~ "14" ]]; then
 		fail "$OS $VER is not supported"
-		info "Only Debian 10+ are supported"
+		info "Only Debian 10+ (including 13/14) are supported"
 		exit 1
 	fi
 fi
@@ -247,6 +248,7 @@ info "Start System Update & Dependencies Install"
 update
 
 ## Install Seedbox Environment
+export TERM=${TERM:-xterm}
 tput sgr0; clear
 info "Start Installing Seedbox Environment"
 echo -e "\n"
