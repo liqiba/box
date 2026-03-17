@@ -204,12 +204,27 @@ install_qBittorrent_(){
 		warn "Unsupported CPU architecture"
 		return 1
 	fi
-	wget ./vendor/Seedbox-Components/Torrent%20Clients/qBittorrent/$arch/$qb_ver%20-%20$lib_ver/qbittorrent-nox -O $HOME/qbittorrent-nox && chmod +x $HOME/qbittorrent-nox
-	#Check if the download is successful
-	if [ $? -ne 0 ]; then
-		warn "Failed to download qBittorrent-nox executable"
-		return 1
+
+	# Preferred source: your own release assets (recommended)
+	# Override with env: QB_BIN_BASE_URL
+	QB_BIN_BASE_URL=${QB_BIN_BASE_URL:-"https://github.com/liqiba/box/releases/download/qb-binaries"}
+	qb_bin_name="qbittorrent-nox-${arch}-${qb_ver}-${lib_ver}"
+	qb_bin_url="${QB_BIN_BASE_URL}/${qb_bin_name}"
+
+	# Fallback source: local vendored binary path (if present)
+	qb_local_path="./vendor/Seedbox-Components/Torrent Clients/qBittorrent/${arch}/${qb_ver} - ${lib_ver}/qbittorrent-nox"
+
+	if [ -f "$qb_local_path" ]; then
+		cp "$qb_local_path" "$HOME/qbittorrent-nox"
+	else
+		if ! curl -fL "$qb_bin_url" -o "$HOME/qbittorrent-nox"; then
+			warn "Failed to download qBittorrent-nox executable"
+			warn "Tried URL: $qb_bin_url"
+			warn "Please upload asset named: $qb_bin_name"
+			return 1
+		fi
 	fi
+	chmod +x "$HOME/qbittorrent-nox"
 
 	# Install qbittorrent-nox
 	mv $HOME/qbittorrent-nox /usr/bin/qbittorrent-nox
