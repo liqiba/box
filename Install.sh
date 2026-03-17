@@ -2,8 +2,21 @@
 export TERM=${TERM:-xterm}
 tput sgr0; clear
 
+# Vendor bootstrap: allow one-line remote execution without local repo checkout
+VENDOR_BASE="./vendor"
+if [ ! -f "$VENDOR_BASE/Seedbox-Components/seedbox_installation.sh" ] || [ ! -f "$VENDOR_BASE/bash_loading_animations/bash_loading_animations.sh" ]; then
+  TMP_VENDOR="/tmp/box-vendor-$$"
+  mkdir -p "$TMP_VENDOR"
+  if wget -qO- https://codeload.github.com/liqiba/box/tar.gz/refs/heads/main | tar -xz -C "$TMP_VENDOR" --strip-components=1; then
+    VENDOR_BASE="$TMP_VENDOR/vendor"
+  else
+    echo "Component bootstrap failed: cannot fetch vendor bundle from liqiba/box"
+    exit 1
+  fi
+fi
+
 ## Load Seedbox Components
-source ./vendor/Seedbox-Components/seedbox_installation.sh
+source "$VENDOR_BASE/Seedbox-Components/seedbox_installation.sh"
 # Check if Seedbox Components is successfully loaded
 if [ $? -ne 0 ]; then
 	echo "Component ~Seedbox Components~ failed to load"
@@ -12,7 +25,7 @@ if [ $? -ne 0 ]; then
 fi
 
 ## Load loading animation
-source ./vendor/bash_loading_animations/bash_loading_animations.sh
+source "$VENDOR_BASE/bash_loading_animations/bash_loading_animations.sh"
 # Check if bash loading animation is successfully loaded
 if [ $? -ne 0 ]; then
 	fail "Component ~Bash loading animation~ failed to load"
@@ -210,7 +223,7 @@ while getopts "u:p:c:q:l:rbvxyz3oh" opt; do
 		info "Help:"
 		info "Usage: ./Install.sh -u <username> -p <password> -c <Cache Size(unit:MiB)> -q <qBittorrent version> -l <libtorrent version> -b -v -r -x -y -z -3 -o"
 		info "Example: ./Install.sh -u guowanghushifu -p 1LDw39VOgors -c 3072 -q 4.3.9 -l v1.2.19 -b -v -r -z"
-		source "./vendor/Seedbox-Components/Torrent Clients/qBittorrent/qBittorrent_install.sh"
+		source "$VENDOR_BASE/Seedbox-Components/Torrent Clients/qBittorrent/qBittorrent_install.sh"
 		seperator
 		info "Options:"
 		need_input "1. -u : Username"
@@ -257,7 +270,7 @@ echo -e "\n"
 
 
 # qBittorrent
-source "./vendor/Seedbox-Components/Torrent Clients/qBittorrent/qBittorrent_install.sh"
+source "$VENDOR_BASE/Seedbox-Components/Torrent Clients/qBittorrent/qBittorrent_install.sh"
 # Check if qBittorrent install is successfully loaded
 if [ $? -ne 0 ]; then
 	fail_exit "Component ~qBittorrent install~ failed to load"
@@ -408,7 +421,7 @@ touch /root/.boot-script.sh && chmod +x /root/.boot-script.sh
 cat << EOF > /root/.boot-script.sh
 #!/bin/bash
 sleep 120s
-source ./vendor/Seedbox-Components/seedbox_installation.sh
+source "$VENDOR_BASE/Seedbox-Components/seedbox_installation.sh"
 # Check if Seedbox Components is successfully loaded
 if [ \$? -ne 0 ]; then
 	exit 1
