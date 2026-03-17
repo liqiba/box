@@ -210,7 +210,7 @@ while getopts "u:p:c:q:l:rbvxyz3oh" opt; do
 		info "Help:"
 		info "Usage: ./Install.sh -u <username> -p <password> -c <Cache Size(unit:MiB)> -q <qBittorrent version> -l <libtorrent version> -b -v -r -x -y -z -3 -o"
 		info "Example: ./Install.sh -u guowanghushifu -p 1LDw39VOgors -c 3072 -q 4.3.9 -l v1.2.19 -b -v -r -z"
-		source ./vendor/Seedbox-Components/Torrent Clients/qBittorrent/qBittorrent_install.sh
+		source "./vendor/Seedbox-Components/Torrent Clients/qBittorrent/qBittorrent_install.sh"
 		seperator
 		info "Options:"
 		need_input "1. -u : Username"
@@ -257,7 +257,7 @@ echo -e "\n"
 
 
 # qBittorrent
-source ./vendor/Seedbox-Components/Torrent Clients/qBittorrent/qBittorrent_install.sh
+source "./vendor/Seedbox-Components/Torrent Clients/qBittorrent/qBittorrent_install.sh"
 # Check if qBittorrent install is successfully loaded
 if [ $? -ne 0 ]; then
 	fail_exit "Component ~qBittorrent install~ failed to load"
