@@ -26,7 +26,7 @@ if [ ! -f /usr/src/linux-headers-$(uname -r)/.config ]; then
 fi
 
 #BBRx
-wget -O $HOME/tcp_bbrx.c ./vendor/Seedbox-Components/BBR/BBRx/tcp_bbrx-v2.c
+wget -O $HOME/tcp_bbrx.c https://raw.githubusercontent.com/guowanghushifu/Seedbox-Components/main/BBR/BBRx/tcp_bbrx-v2.c
 if [ ! -f $HOME/tcp_bbrx.c ]; then
 	echo "Error: Download failed! Exiting." >&2
 	exit 1

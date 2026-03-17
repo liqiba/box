@@ -78,7 +78,7 @@ bbr_compile() {
 
 	# Compile BBR
 	cd /$HOME/bbr
-	wget ./vendor/Seedbox-Components/BBR/BBRv3/.config
+	wget https://raw.githubusercontent.com/guowanghushifu/Seedbox-Components/main/BBR/BBRv3/.config
 	make bindeb-pkg -j$(nproc)
 	if [ $? -ne 0 ]; then
 		rm -rf /$HOME/bbr

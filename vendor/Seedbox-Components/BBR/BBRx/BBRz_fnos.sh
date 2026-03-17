@@ -15,7 +15,7 @@ if [ ! -x /usr/sbin/dkms ]; then
 fi
 
 #bbrz
-wget -O $HOME/tcp_bbrz.c ./vendor/Seedbox-Components/BBR/BBRx/tcp_bbr_fnos.c
+wget -O $HOME/tcp_bbrz.c https://raw.githubusercontent.com/guowanghushifu/Seedbox-Components/main/BBR/BBRx/tcp_bbr_fnos.c
 if [ ! -f $HOME/tcp_bbrz.c ]; then
 	echo "Error: Download failed! Exiting." >&2
 	exit 1
