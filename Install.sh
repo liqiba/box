@@ -208,8 +208,8 @@ while getopts "u:p:c:q:l:rbvxyz3oh" opt; do
 		;;
 	h ) # process option help
 		info "Help:"
-		info "Usage: ./Install.sh -u <username> -p <password> -c <Cache Size(unit:MiB)> -q <qBittorrent version> -l <libtorrent version> -b -v -r -3 -x -p"
-		info "Example: ./Install.sh -u guowanghushifu -p 1LDw39VOgors -c 3072 -q 4.3.9 -l v1.2.19 -b -v -r -3"
+		info "Usage: ./Install.sh -u <username> -p <password> -c <Cache Size(unit:MiB)> -q <qBittorrent version> -l <libtorrent version> -b -v -r -x -y -z -3 -o"
+		info "Example: ./Install.sh -u guowanghushifu -p 1LDw39VOgors -c 3072 -q 4.3.9 -l v1.2.19 -b -v -r -z"
 		source ./vendor/Seedbox-Components/Torrent Clients/qBittorrent/qBittorrent_install.sh
 		seperator
 		info "Options:"
@@ -229,15 +229,17 @@ while getopts "u:p:c:q:l:rbvxyz3oh" opt; do
 		need_input "7. -b : Install autobrr"
 		need_input "8. -v : Install vertex"
 		need_input "9. -x : Install BBRx"
-		need_input "10. -3 : Install BBRv3"
-		need_input "11. -p : Specify ports for qBittorrent, autobrr and vertex"
-		need_input "12. -h : Display help message"
+		need_input "10. -y : Install BBRy"
+		need_input "11. -z : Install BBRz"
+		need_input "12. -3 : Install BBRv3"
+		need_input "13. -o : Specify ports for qBittorrent, autobrr and vertex"
+		need_input "14. -h : Display help message"
 		exit 0
 		;;
 	\? ) 
 		info "Help:"
-		info_2 "Usage: ./Install.sh -u <username> -p <password> -c <Cache Size(unit:MiB)> -q <qBittorrent version> -l <libtorrent version> -b -v -r -3 -x -p"
-		info_2 "Example ./Install.sh -u guowanghushifu -p 1LDw39VOgors -c 3072 -q 4.3.9 -l v1.2.19 -b -v -r -3"
+		info_2 "Usage: ./Install.sh -u <username> -p <password> -c <Cache Size(unit:MiB)> -q <qBittorrent version> -l <libtorrent version> -b -v -r -x -y -z -3 -o"
+		info_2 "Example ./Install.sh -u guowanghushifu -p 1LDw39VOgors -c 3072 -q 4.3.9 -l v1.2.19 -b -v -r -z"
 		exit 1
 		;;
 	esac
